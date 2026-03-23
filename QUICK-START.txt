@@ -1,0 +1,92 @@
+═══════════════════════════════════════════════════
+  MED-AI PROJECT - QUICK START CHEAT SHEET
+═══════════════════════════════════════════════════
+
+📍 PROJECT LOCATION:
+   c:\My Stuff\LPU\SEM 7\Capstone\med-ai
+
+═══════════════════════════════════════════════════
+  🚀 HOW TO START THE PROJECT
+═══════════════════════════════════════════════════
+
+1. Open Terminal/PowerShell
+2. Navigate to project:
+   
+   cd "c:\My Stuff\LPU\SEM 7\Capstone\med-ai"
+
+3. Run:
+   
+   bun dev
+
+4. Open browser:
+   
+   http://localhost:3000
+
+THAT'S IT! 🎉
+
+═══════════════════════════════════════════════════
+  📋 FIRST TIME SETUP (Only once)
+═══════════════════════════════════════════════════
+
+bun install          # Install packages
+bun run db:push      # Setup database
+bun dev              # Start app
+
+═══════════════════════════════════════════════════
+  🔧 USEFUL COMMANDS
+═══════════════════════════════════════════════════
+
+bun dev              → Start development server
+bun run db:studio    → View database
+bun run build        → Build for production
+bun run lint         → Check code quality
+bun run db:push      → Update database schema
+
+═══════════════════════════════════════════════════
+  🐛 TROUBLESHOOTING
+═══════════════════════════════════════════════════
+
+❌ Port 3000 busy?
+   → Close other apps using port 3000
+   → Or change port: next dev -p 3001
+
+❌ Database error?
+   → Run: bun run db:push
+
+❌ Module not found?
+   → Run: bun install
+
+❌ App not loading?
+   → Check terminal for errors
+   → Clear cache: rm -rf .next
+   → Restart: bun dev
+
+═══════════════════════════════════════════════════
+  📚 DOCUMENTATION
+═══════════════════════════════════════════════════
+
+Full Setup Guide:  SETUP.md
+Project Info:      README.md
+This Cheat Sheet:  QUICK-START.txt
+
+═══════════════════════════════════════════════════
+  💡 REMEMBER
+═══════════════════════════════════════════════════
+
+✓ Always run "bun dev" to start
+✓ Keep terminal open while coding
+✓ Save files → browser auto-refreshes
+✓ Check terminal for errors
+✓ Use Ctrl+C to stop the server
+
+═══════════════════════════════════════════════════
+  🌐 URLs TO REMEMBER
+═══════════════════════════════════════════════════
+
+App:              http://localhost:3000
+Database Studio:  https://local.drizzle.studio
+Ngrok Webhook:    winning-hagfish-upright.ngrok-free.app
+
+═══════════════════════════════════════════════════
+
+Last Updated: March 2026

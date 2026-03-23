@@ -1,0 +1,78 @@
+# 🏥 Med-AI
+
+An AI-powered medical consultation platform with real-time video, chat, and intelligent agents built with Next.js.
+
+## ⚡ Quick Start
+
+```bash
+# Install dependencies
+bun install
+
+# Set up database
+bun run db:push
+
+# Start development server
+bun dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) to see the app.
+
+## 📚 Full Setup Guide
+
+**New to this project?** Read the complete setup guide: **[SETUP.md](./SETUP.md)**
+
+## 🛠️ Tech Stack
+
+- **Framework:** Next.js 15 (App Router)
+- **Runtime:** Bun
+- **Database:** Neon PostgreSQL + Drizzle ORM
+- **Auth:** Better Auth
+- **Real-time:** Stream.io (Video & Chat)
+- **AI:** OpenAI + Inngest Agents
+- **UI:** React 19 + Radix UI + Tailwind CSS
+
+## 📦 Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `bun dev` | Start development server |
+| `bun run build` | Build for production |
+| `bun start` | Run production server |
+| `bun run lint` | Run ESLint |
+| `bun run db:push` | Push database schema |
+| `bun run db:studio` | Open Drizzle Studio |
+| `bun run dev:webhook` | Start ngrok for webhooks |
+
+## 🌟 Features
+
+- 🎥 Real-time video consultations
+- 💬 AI-powered chat with medical context
+- 🤖 Intelligent medical agents
+- 🔐 Secure authentication
+- 📊 Patient history tracking
+- 🎨 Modern, responsive UI
+
+## 📁 Project Structure
+
+```
+med-ai/
+├── src/
+│   ├── app/              # Next.js pages & API routes
+│   ├── db/               # Database schema & config
+│   └── modules/          # Feature modules
+├── public/               # Static assets
+├── .env                  # Environment variables
+└── SETUP.md             # Complete setup guide
+```
+
+## 🔗 Resources
+
+- [Full Setup Guide](./SETUP.md)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Drizzle ORM](https://orm.drizzle.team)
+- [Stream.io Docs](https://getstream.io/video/docs/)
+- [Better Auth](https://better-auth.com)
+
+## 📝 License
+
+This project is for educational purposes (LPU SEM 7 Capstone Project).
