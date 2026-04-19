@@ -1,4 +1,5 @@
 import React from "react";
+import dynamic from "next/dynamic";
 import { MeetingGetOne } from "../../types";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
@@ -9,7 +10,6 @@ import {
   SparklesIcon,
   ClockFadingIcon,
 } from "lucide-react";
-import VideoPlayer from "next-video";
 import Markdown from "react-markdown";
 import Link from "next/link";
 import GeneratedAvatar from "@/components/generated-avatar";
@@ -17,7 +17,24 @@ import { format } from "date-fns";
 import { Badge } from "@/components/ui/badge";
 import { formatDuration } from "./columns";
 import Transcript from "./transcript";
-import { ChatProvider } from "./chat-provider";
+import LoadingState from "@/components/loading-state";
+
+const VideoPlayer = dynamic(() => import("next-video"), {
+  loading: () => (
+    <LoadingState title="Loading video" description="Please wait..." />
+  ),
+  ssr: false,
+});
+
+const ChatProvider = dynamic(
+  () => import("./chat-provider").then((m) => m.ChatProvider),
+  {
+    loading: () => (
+      <LoadingState title="Loading AI chat" description="Please wait..." />
+    ),
+    ssr: false,
+  }
+);
 
 interface Props {
   data: MeetingGetOne;

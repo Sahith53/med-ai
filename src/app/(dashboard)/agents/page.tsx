@@ -1,13 +1,11 @@
 import ErrorState from "@/components/error-state";
 import LoadingState from "@/components/loading-state";
-import { auth } from "@/lib/auth";
 import { loadSearchParams } from "@/modules/agents/params";
 import AgentsListHeader from "@/modules/agents/ui/components/agents-list-header";
-import ListHeader from "@/modules/agents/ui/components/agents-list-header";
 import AgentsView from "@/modules/agents/ui/views/agents-view";
 import { getQueryClient, trpc } from "@/trpc/server";
+import { getSession } from "@/trpc/init";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
-import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { SearchParams } from "nuqs/server";
 import React, { Suspense } from "react";
@@ -20,15 +18,15 @@ interface Props {
 const Page = async ({ searchParams }: Props) => {
   const filters = await loadSearchParams(searchParams);
 
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+  // Uses cached session — shared with any tRPC calls made in this request
+  const session = await getSession();
   if (!session) {
     redirect("/sign-in");
   }
 
   const queryClient = getQueryClient();
-  void queryClient.prefetchQuery(
+  // Await the prefetch so the data is actually in the cache before dehydration
+  await queryClient.prefetchQuery(
     trpc.agents.getMany.queryOptions({
       ...filters,
     })

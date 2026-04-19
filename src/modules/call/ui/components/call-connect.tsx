@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   Call,
   CallingState,
@@ -28,8 +28,19 @@ const CallConnect = ({
   userName,
 }: Props) => {
   const trpc = useTRPC();
-  const { mutateAsync: generateToken } = useMutation(
+  const { mutateAsync } = useMutation(
     trpc.meetings.generateToken.mutationOptions()
+  );
+
+  // Keep a stable ref so the tokenProvider never changes identity between renders,
+  // which previously caused StreamVideoClient to be torn down and recreated on
+  // every render (the "already exists" console error).
+  const mutateAsyncRef = useRef(mutateAsync);
+  mutateAsyncRef.current = mutateAsync;
+
+  const generateToken = useCallback(
+    () => mutateAsyncRef.current(),
+    []
   );
 
   const [client, setClient] = useState<StreamVideoClient>();

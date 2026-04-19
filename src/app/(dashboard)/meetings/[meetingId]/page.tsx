@@ -1,10 +1,9 @@
 import ErrorState from "@/components/error-state";
 import LoadingState from "@/components/loading-state";
-import { auth } from "@/lib/auth";
 import MeetingIdView from "@/modules/meetings/ui/views/meeting-id-view";
 import { getQueryClient, trpc } from "@/trpc/server";
+import { getSession } from "@/trpc/init";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
-import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import React, { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
@@ -18,15 +17,15 @@ interface Props {
 const Page = async ({ params }: Props) => {
   const { meetingId } = await params;
 
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+  // Uses cached session — no extra DB call
+  const session = await getSession();
   if (!session) {
     redirect("/sign-in");
   }
 
   const queryClient = getQueryClient();
-  void queryClient.prefetchQuery(
+  // Await the prefetch so the data is actually in cache before dehydration
+  await queryClient.prefetchQuery(
     trpc.meetings.getOne.queryOptions({ id: meetingId })
   );
   return (
