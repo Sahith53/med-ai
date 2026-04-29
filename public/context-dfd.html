@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Figure 3.1 – Context-Level DFD: Public Health Chatbot</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:#eef2f7;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:48px 24px 64px;}
+.card{background:#fff;border-radius:20px;box-shadow:0 2px 8px rgba(0,0,0,.06),0 16px 48px rgba(0,0,0,.09);padding:48px 44px 36px;max-width:1160px;width:100%;}
+.fig-title{text-align:center;font-size:.82rem;font-weight:600;color:#475569;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;}
+.fig-label{text-align:center;font-size:1.15rem;font-weight:700;color:#0f172a;margin-bottom:32px;}
+svg{width:100%;height:auto;display:block;}
+.caption{text-align:center;font-size:.72rem;color:#94a3b8;margin-top:20px;letter-spacing:.04em;}
+</style>
+</head>
+<body>
+<div class="card">
+<p class="fig-title">Figure 3.1</p>
+<p class="fig-label">Context-Level Data Flow Diagram of the Public Health Chatbot</p>
+
+<svg viewBox="0 0 1100 740" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="sysGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#1d4ed8"/>
+    <stop offset="100%" stop-color="#1e40af"/>
+  </linearGradient>
+  <filter id="sh" x="-15%" y="-15%" width="130%" height="130%">
+    <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#00000020"/>
+  </filter>
+  <marker id="ar" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+    <path d="M0,1 L9,5 L0,9 L2,5 Z" fill="#334155"/>
+  </marker>
+  <marker id="ar-bl" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+    <path d="M0,1 L9,5 L0,9 L2,5 Z" fill="#1d4ed8"/>
+  </marker>
+  <marker id="ar-vi" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+    <path d="M0,1 L9,5 L0,9 L2,5 Z" fill="#7c3aed"/>
+  </marker>
+  <marker id="ar-te" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+    <path d="M0,1 L9,5 L0,9 L2,5 Z" fill="#0891b2"/>
+  </marker>
+  <marker id="ar-am" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+    <path d="M0,1 L9,5 L0,9 L2,5 Z" fill="#d97706"/>
+  </marker>
+</defs>
+
+<!-- ── CENTRAL PROCESS BUBBLE ── -->
+<ellipse cx="550" cy="380" rx="215" ry="100" fill="url(#sysGrad)" filter="url(#sh)"/>
+<ellipse cx="550" cy="380" rx="215" ry="100" fill="none" stroke="#93c5fd" stroke-width="1.5" stroke-dasharray="4,3" opacity=".5"/>
+<text x="550" y="366" text-anchor="middle" font-family="Inter" font-size="11" font-weight="600" fill="#bfdbfe" letter-spacing="1.5">PROCESS 0</text>
+<text x="550" y="384" text-anchor="middle" font-family="Inter" font-size="15" font-weight="700" fill="#fff">Med-AI Public Health</text>
+<text x="550" y="402" text-anchor="middle" font-family="Inter" font-size="15" font-weight="700" fill="#fff">Chatbot System</text>
+
+<!-- ════════════════════════════
+     EXTERNAL ENTITY 1 — Patient / User  (LEFT)
+════════════════════════════ -->
+<rect x="22" y="328" width="168" height="104" rx="10" fill="#eff6ff" stroke="#3b82f6" stroke-width="2" filter="url(#sh)"/>
+<rect x="22" y="328" width="168" height="28" rx="10" fill="#3b82f6"/>
+<rect x="22" y="346" width="168" height="10" fill="#3b82f6"/>
+<text x="106" y="348" text-anchor="middle" font-family="Inter" font-size="11" font-weight="700" fill="#fff" letter-spacing=".5">EXTERNAL ENTITY</text>
+<text x="106" y="373" text-anchor="middle" font-family="Inter" font-size="13.5" font-weight="700" fill="#1e3a8a">Patient</text>
+<text x="106" y="390" text-anchor="middle" font-family="Inter" font-size="13.5" font-weight="700" fill="#1e3a8a">/ User</text>
+<text x="106" y="420" text-anchor="middle" font-family="Inter" font-size="9.5" fill="#64748b">Primary Stakeholder</text>
+
+<!-- Patient → System : Login Credentials & Symptom Data -->
+<line x1="192" y1="362" x2="334" y2="362" stroke="#3b82f6" stroke-width="2" marker-end="url(#ar-bl)"/>
+<rect x="193" y="340" width="135" height="18" rx="4" fill="#eff6ff"/>
+<text x="260" y="352" text-anchor="middle" font-family="Inter" font-size="9" font-weight="500" fill="#1d4ed8">Login Credentials &amp; Symptom Data</text>
+
+<!-- System → Patient : Risk Assessment & Summaries -->
+<line x1="334" y1="400" x2="192" y2="400" stroke="#3b82f6" stroke-width="2" marker-end="url(#ar-bl)"/>
+<rect x="193" y="403" width="135" height="18" rx="4" fill="#eff6ff"/>
+<text x="260" y="415" text-anchor="middle" font-family="Inter" font-size="9" font-weight="500" fill="#1d4ed8">Risk Assessment, Advice &amp; Summaries</text>
+
+<!-- ════════════════════════════
+     EXTERNAL ENTITY 2 — OpenAI API  (TOP)
+════════════════════════════ -->
+<rect x="400" y="22" width="300" height="100" rx="10" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2" filter="url(#sh)"/>
+<rect x="400" y="22" width="300" height="28" rx="10" fill="#7c3aed"/>
+<rect x="400" y="40" width="300" height="10" fill="#7c3aed"/>
+<text x="550" y="42" text-anchor="middle" font-family="Inter" font-size="11" font-weight="700" fill="#fff" letter-spacing=".5">EXTERNAL ENTITY</text>
+<text x="550" y="72" text-anchor="middle" font-family="Inter" font-size="13.5" font-weight="700" fill="#4c1d95">OpenAI API</text>
+<text x="550" y="89" text-anchor="middle" font-family="Inter" font-size="9.5" fill="#64748b">GPT-4o · Realtime · Agent Kit</text>
+<text x="550" y="108" text-anchor="middle" font-family="Inter" font-size="9.5" fill="#64748b">Summarization · Triage · Chat</text>
+
+<!-- System → OpenAI : Transcript + Prompt -->
+<line x1="524" y1="280" x2="524" y2="122" stroke="#7c3aed" stroke-width="2" marker-end="url(#ar-vi)"/>
+<rect x="390" y="195" width="126" height="18" rx="4" fill="#f5f3ff"/>
+<text x="453" y="207" text-anchor="middle" font-family="Inter" font-size="9" font-weight="500" fill="#6d28d9">Transcript + Agent Prompt</text>
+
+<!-- OpenAI → System : AI Summary & Responses -->
+<line x1="576" y1="122" x2="576" y2="280" stroke="#7c3aed" stroke-width="2" marker-end="url(#ar-vi)"/>
+<rect x="584" y="195" width="122" height="18" rx="4" fill="#f5f3ff"/>
+<text x="645" y="207" text-anchor="middle" font-family="Inter" font-size="9" font-weight="500" fill="#6d28d9">AI Summary &amp; Triage Response</text>
+
+<!-- ════════════════════════════
+     EXTERNAL ENTITY 3 — Stream.io Platform  (BOTTOM)
+════════════════════════════ -->
+<rect x="375" y="624" width="352" height="100" rx="10" fill="#ecfeff" stroke="#0891b2" stroke-width="2" filter="url(#sh)"/>
+<rect x="375" y="624" width="352" height="28" rx="10" fill="#0891b2"/>
+<rect x="375" y="642" width="352" height="10" fill="#0891b2"/>
+<text x="551" y="644" text-anchor="middle" font-family="Inter" font-size="11" font-weight="700" fill="#fff" letter-spacing=".5">EXTERNAL ENTITY</text>
+<text x="551" y="674" text-anchor="middle" font-family="Inter" font-size="13.5" font-weight="700" fill="#164e63">Stream.io Platform</text>
+<text x="551" y="691" text-anchor="middle" font-family="Inter" font-size="9.5" fill="#475569">Video SDK · Chat SDK · Webhooks</text>
+<text x="551" y="708" text-anchor="middle" font-family="Inter" font-size="9.5" fill="#475569">Transcription · Recording · Real-time</text>
+
+<!-- System → Stream : Call Config & Agent Bridge -->
+<line x1="524" y1="480" x2="524" y2="624" stroke="#0891b2" stroke-width="2" marker-end="url(#ar-te)"/>
+<rect x="390" y="546" width="126" height="18" rx="4" fill="#ecfeff"/>
+<text x="453" y="558" text-anchor="middle" font-family="Inter" font-size="9" font-weight="500" fill="#0e7490">Call Config &amp; Agent Bridge</text>
+
+<!-- Stream → System : Webhook Events & Transcript URL -->
+<line x1="576" y1="624" x2="576" y2="480" stroke="#0891b2" stroke-width="2" marker-end="url(#ar-te)"/>
+<rect x="584" y="546" width="130" height="18" rx="4" fill="#ecfeff"/>
+<text x="649" y="558" text-anchor="middle" font-family="Inter" font-size="9" font-weight="500" fill="#0e7490">Webhook Events &amp; Transcript URL</text>
+
+<!-- ════════════════════════════
+     EXTERNAL ENTITY 4 — System Admin  (RIGHT)
+════════════════════════════ -->
+<rect x="912" y="328" width="168" height="104" rx="10" fill="#fffbeb" stroke="#f59e0b" stroke-width="2" filter="url(#sh)"/>
+<rect x="912" y="328" width="168" height="28" rx="10" fill="#f59e0b"/>
+<rect x="912" y="346" width="168" height="10" fill="#f59e0b"/>
+<text x="996" y="348" text-anchor="middle" font-family="Inter" font-size="11" font-weight="700" fill="#fff" letter-spacing=".5">EXTERNAL ENTITY</text>
+<text x="996" y="374" text-anchor="middle" font-family="Inter" font-size="13.5" font-weight="700" fill="#78350f">System</text>
+<text x="996" y="391" text-anchor="middle" font-family="Inter" font-size="13.5" font-weight="700" fill="#78350f">Admin</text>
+<text x="996" y="420" text-anchor="middle" font-family="Inter" font-size="9.5" fill="#64748b">Platform Manager</text>
+
+<!-- Admin → System : Agent Config & Settings -->
+<line x1="910" y1="362" x2="766" y2="362" stroke="#f59e0b" stroke-width="2" marker-end="url(#ar-am)"/>
+<rect x="774" y="340" width="130" height="18" rx="4" fill="#fffbeb"/>
+<text x="839" y="352" text-anchor="middle" font-family="Inter" font-size="9" font-weight="500" fill="#b45309">Agent Config &amp; System Settings</text>
+
+<!-- System → Admin : Analytics & Usage Logs -->
+<line x1="766" y1="400" x2="910" y2="400" stroke="#f59e0b" stroke-width="2" marker-end="url(#ar-am)"/>
+<rect x="774" y="403" width="130" height="18" rx="4" fill="#fffbeb"/>
+<text x="839" y="415" text-anchor="middle" font-family="Inter" font-size="9" font-weight="500" fill="#b45309">Platform Analytics &amp; Usage Logs</text>
+
+<!-- ════════════════════════════
+     LEGEND
+════════════════════════════ -->
+<rect x="22" y="650" width="344" height="72" rx="10" fill="#f8faff" stroke="#e2e8f0" stroke-width="1.2"/>
+<text x="38" y="670" font-family="Inter" font-size="10" font-weight="700" fill="#334155">Legend</text>
+<!-- flow arrow sample -->
+<line x1="38" y1="684" x2="75" y2="684" stroke="#334155" stroke-width="1.8" marker-end="url(#ar)"/>
+<text x="82" y="688" font-family="Inter" font-size="9.5" fill="#475569">Data Flow</text>
+<!-- entity sample -->
+<rect x="38" y="696" width="18" height="14" rx="3" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+<text x="62" y="706" font-family="Inter" font-size="9.5" fill="#475569">External Entity</text>
+<!-- process sample -->
+<ellipse cx="159" cy="684" rx="20" ry="10" fill="#1d4ed8"/>
+<text x="184" y="688" font-family="Inter" font-size="9.5" fill="#475569">System Process (P0)</text>
+<!-- label box sample -->
+<rect x="159" y="696" width="40" height="14" rx="3" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+<text x="204" y="706" font-family="Inter" font-size="9.5" fill="#475569">Flow Label</text>
+
+<!-- Corner decorative dots -->
+<circle cx="550" cy="380" r="4" fill="#fff" opacity=".4"/>
+</svg>
+
+<p class="caption">Figure 3.1: Context-Level Data Flow Diagram (DFD Level 0) of the Public Health Chatbot &nbsp;·&nbsp; Med-AI Capstone Project &nbsp;·&nbsp; LPU SEM 7, 2026</p>
+</div>
+</body>
+</html>

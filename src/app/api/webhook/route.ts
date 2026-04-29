@@ -1,9 +1,10 @@
 import { db } from "@/db";
-import { agents, meetings } from "@/db/schema";
+import { agents, meetings, triageSessions } from "@/db/schema";
 import { inngest } from "@/inngest/client";
 import { generateAvatarUri } from "@/lib/avatar";
 import { streamChat } from "@/lib/stream-chat";
 import { streamVideo } from "@/lib/stream-video";
+import { buildMedicalPrompt } from "@/modules/triage/server/medical-prompt";
 import {
   CallEndedEvent,
   MessageNewEvent,
@@ -12,7 +13,7 @@ import {
   CallRecordingReadyEvent,
   CallSessionStartedEvent,
 } from "@stream-io/node-sdk";
-import { and, eq, not } from "drizzle-orm";
+import { and, desc, eq, not } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
@@ -114,6 +115,61 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const [meetingLinkedTriageContext] = await db
+      .select({
+        symptoms: triageSessions.symptoms,
+        riskLevel: triageSessions.riskLevel,
+        specialist: triageSessions.specialistRecommendation,
+      })
+      .from(triageSessions)
+      .where(
+        and(
+          eq(triageSessions.meetingId, existingMeeting.id),
+          eq(triageSessions.userId, existingMeeting.userId)
+        )
+      )
+      .orderBy(desc(triageSessions.createdAt))
+      .limit(1);
+
+    const [latestUserTriageContext] = meetingLinkedTriageContext
+      ? [meetingLinkedTriageContext]
+      : await db
+          .select({
+            symptoms: triageSessions.symptoms,
+            riskLevel: triageSessions.riskLevel,
+            specialist: triageSessions.specialistRecommendation,
+          })
+          .from(triageSessions)
+          .where(eq(triageSessions.userId, existingMeeting.userId))
+          .orderBy(desc(triageSessions.createdAt))
+          .limit(1);
+
+    const triageContext = latestUserTriageContext;
+
+    let triageSymptoms: string[] = [];
+    if (triageContext?.symptoms) {
+      try {
+        const parsed = JSON.parse(triageContext.symptoms) as unknown;
+        if (Array.isArray(parsed)) {
+          triageSymptoms = parsed
+            .filter((s): s is string => typeof s === "string")
+            .map((s) => s.trim())
+            .filter(Boolean);
+        }
+      } catch {
+        triageSymptoms = [];
+      }
+    }
+
+    const dynamicMedicalPrompt = buildMedicalPrompt({
+      symptoms: triageSymptoms,
+      riskLevel: triageContext?.riskLevel ?? "unknown",
+      specialist: triageContext?.specialist ?? "General Physician",
+    });
+    const sessionInstructions = triageContext
+      ? `${dynamicMedicalPrompt}\n\nAdditional agent instructions:\n${existingAgent.instructions}`
+      : existingAgent.instructions;
+
     const call = streamVideo.video.call("default", meetingId);
     const realtimeClient = await streamVideo.video.connectOpenAi({
       call,
@@ -122,7 +178,7 @@ export async function POST(req: NextRequest) {
     });
 
     realtimeClient.updateSession({
-      instructions: existingAgent.instructions,
+      instructions: sessionInstructions,
     });
   } else if (eventType === "call.session_participant_left") {
     const event = payload as CallSessionParticipantLeftEvent;

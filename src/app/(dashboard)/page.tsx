@@ -6,6 +6,6 @@ export default async function Home() {
   if (!session || !session.user) {
     redirect("/sign-in");
   } else {
-    redirect("/agents");
+    redirect("/triage");
   }
 }

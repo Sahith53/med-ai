@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Figure 1.1 – Use Case Diagram: Public Health Chatbot</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Inter',sans-serif;
+  background:#eef2f7;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:48px 24px 64px;
+}
+.card{
+  background:#fff;
+  border-radius:20px;
+  box-shadow:0 2px 8px rgba(0,0,0,.06),0 16px 48px rgba(0,0,0,.09);
+  padding:48px 44px 36px;
+  max-width:1180px;
+  width:100%;
+}
+.fig-title{
+  text-align:center;
+  font-size:.82rem;
+  font-weight:600;
+  color:#475569;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+.fig-label{
+  text-align:center;
+  font-size:1.15rem;
+  font-weight:700;
+  color:#0f172a;
+  margin-bottom:32px;
+}
+svg{width:100%;height:auto;display:block;}
+.caption{
+  text-align:center;
+  font-size:.72rem;
+  color:#94a3b8;
+  margin-top:20px;
+  letter-spacing:.04em;
+}
+</style>
+</head>
+<body>
+<div class="card">
+  <p class="fig-title">Figure 1.1</p>
+  <p class="fig-label">Use Case Diagram of the Public Health Chatbot</p>
+
+<svg viewBox="0 0 1140 800" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#00000018"/>
+  </filter>
+  <!-- Arrow heads -->
+  <marker id="a-assoc" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+    <path d="M0,0 L9,4.5 L0,9 L2,4.5 Z" fill="#475569"/>
+  </marker>
+  <marker id="a-inc" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+    <path d="M0,0 L9,4.5 L0,9 L2,4.5 Z" fill="#4f46e5"/>
+  </marker>
+  <marker id="a-ext" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+    <path d="M0,0 L9,4.5 L0,9 L2,4.5 Z" fill="#e05c1a"/>
+  </marker>
+</defs>
+
+<!-- ── SYSTEM BOUNDARY ── -->
+<rect x="185" y="50" width="790" height="710" rx="14"
+      fill="#f8faff" stroke="#c7d7f5" stroke-width="2" stroke-dasharray="8,4"/>
+<text x="580" y="34" text-anchor="middle"
+      font-family="Inter" font-size="11" font-weight="700"
+      fill="#64748b" letter-spacing="2">SYSTEM BOUNDARY — PUBLIC HEALTH CHATBOT</text>
+
+<!-- ══════════════════════════════════════
+     LEFT COLUMN USE CASES  (cx=385)
+     Patient-facing interactions
+══════════════════════════════════════ -->
+
+<!-- UC1: Register / Login -->
+<ellipse cx="385" cy="118" rx="115" ry="30" fill="#fff" stroke="#3b82f6" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="385" y="122" text-anchor="middle" font-family="Inter" font-size="12.5" font-weight="500" fill="#1e293b">Register / Login</text>
+
+<!-- UC2: Describe Symptoms -->
+<ellipse cx="385" cy="220" rx="118" ry="30" fill="#fff" stroke="#3b82f6" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="385" y="224" text-anchor="middle" font-family="Inter" font-size="12.5" font-weight="500" fill="#1e293b">Describe Symptoms</text>
+
+<!-- UC3: View Risk Level & Advice -->
+<ellipse cx="385" cy="328" rx="128" ry="30" fill="#fff" stroke="#3b82f6" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="385" y="332" text-anchor="middle" font-family="Inter" font-size="12.5" font-weight="500" fill="#1e293b">View Risk Level &amp; Advice</text>
+
+<!-- UC4: Schedule Video Consultation -->
+<ellipse cx="385" cy="438" rx="136" ry="30" fill="#fff" stroke="#3b82f6" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="385" y="442" text-anchor="middle" font-family="Inter" font-size="12.5" font-weight="500" fill="#1e293b">Schedule Video Consultation</text>
+
+<!-- UC5: Post-Meeting Chat -->
+<ellipse cx="385" cy="545" rx="118" ry="30" fill="#fff" stroke="#3b82f6" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="385" y="549" text-anchor="middle" font-family="Inter" font-size="12.5" font-weight="500" fill="#1e293b">Post-Meeting Chat</text>
+
+<!-- UC6: View Meeting History -->
+<ellipse cx="385" cy="645" rx="124" ry="30" fill="#fff" stroke="#3b82f6" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="385" y="649" text-anchor="middle" font-family="Inter" font-size="12.5" font-weight="500" fill="#1e293b">View Meeting History</text>
+
+<!-- ══════════════════════════════════════
+     RIGHT COLUMN USE CASES  (cx=780)
+     AI / System-driven
+══════════════════════════════════════ -->
+
+<!-- UC7: AI Triage Assessment -->
+<ellipse cx="780" cy="220" rx="128" ry="30" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="780" y="224" text-anchor="middle" font-family="Inter" font-size="12.5" font-weight="500" fill="#14532d">AI Triage Assessment</text>
+
+<!-- UC8: Get Specialist Recommendation -->
+<ellipse cx="780" cy="328" rx="148" ry="30" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="780" y="332" text-anchor="middle" font-family="Inter" font-size="12.5" font-weight="500" fill="#14532d">Get Specialist Recommendation</text>
+
+<!-- UC9: Join AI Video Call -->
+<ellipse cx="780" cy="438" rx="128" ry="30" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="780" y="442" text-anchor="middle" font-family="Inter" font-size="12.5" font-weight="500" fill="#14532d">Join AI Video Call</text>
+
+<!-- UC10: Auto-Transcribe & Record -->
+<ellipse cx="780" cy="530" rx="132" ry="28" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="780" y="527" text-anchor="middle" font-family="Inter" font-size="12.5" font-weight="500" fill="#14532d">Auto-Transcribe</text>
+<text x="780" y="541" text-anchor="middle" font-family="Inter" font-size="12.5" font-weight="500" fill="#14532d">&amp; Record Session</text>
+
+<!-- UC11: Generate Meeting Summary -->
+<ellipse cx="780" cy="620" rx="138" ry="30" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="780" y="617" text-anchor="middle" font-family="Inter" font-size="12.5" font-weight="500" fill="#14532d">Generate AI</text>
+<text x="780" y="631" text-anchor="middle" font-family="Inter" font-size="12.5" font-weight="500" fill="#14532d">Meeting Summary</text>
+
+<!-- UC12: Manage AI Agents (Admin) -->
+<ellipse cx="780" cy="718" rx="132" ry="28" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="780" y="715" text-anchor="middle" font-family="Inter" font-size="12.5" font-weight="500" fill="#78350f">Manage AI Agents</text>
+<text x="780" y="729" text-anchor="middle" font-family="Inter" font-size="12.5" font-weight="500" fill="#78350f">&amp; Configuration</text>
+
+<!-- ══════════════════════════════════════
+     ACTOR: Patient / User  (left)
+     head at (72,350), fanned lines to UCs
+══════════════════════════════════════ -->
+<!-- Head -->
+<circle cx="72" cy="350" r="20" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+<!-- Body -->
+<line x1="72" y1="370" x2="72" y2="418" stroke="#3b82f6" stroke-width="2"/>
+<!-- Arms -->
+<line x1="46" y1="390" x2="98" y2="390" stroke="#3b82f6" stroke-width="2"/>
+<!-- Legs -->
+<line x1="72" y1="418" x2="48" y2="448" stroke="#3b82f6" stroke-width="2"/>
+<line x1="72" y1="418" x2="96" y2="448" stroke="#3b82f6" stroke-width="2"/>
+<text x="72" y="468" text-anchor="middle" font-family="Inter" font-size="13" font-weight="600" fill="#1e3a5f">Patient</text>
+<text x="72" y="482" text-anchor="middle" font-family="Inter" font-size="13" font-weight="600" fill="#1e3a5f">/ User</text>
+
+<!-- Patient → Register/Login -->
+<line x1="92" y1="336" x2="268" y2="122" stroke="#64748b" stroke-width="1.5" marker-end="url(#a-assoc)"/>
+<!-- Patient → Describe Symptoms -->
+<line x1="92" y1="347" x2="265" y2="222" stroke="#64748b" stroke-width="1.5" marker-end="url(#a-assoc)"/>
+<!-- Patient → View Risk Level -->
+<line x1="92" y1="362" x2="255" y2="329" stroke="#64748b" stroke-width="1.5" marker-end="url(#a-assoc)"/>
+<!-- Patient → Schedule Video Consultation -->
+<line x1="92" y1="378" x2="248" y2="437" stroke="#64748b" stroke-width="1.5" marker-end="url(#a-assoc)"/>
+<!-- Patient → Post-Meeting Chat -->
+<line x1="88" y1="392" x2="265" y2="543" stroke="#64748b" stroke-width="1.5" marker-end="url(#a-assoc)"/>
+<!-- Patient → View Meeting History -->
+<line x1="84" y1="405" x2="259" y2="643" stroke="#64748b" stroke-width="1.5" marker-end="url(#a-assoc)"/>
+
+<!-- ══════════════════════════════════════
+     ACTOR: AI Health Agent  (right, upper)
+══════════════════════════════════════ -->
+<circle cx="1068" cy="260" r="20" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+<line x1="1068" y1="280" x2="1068" y2="326" stroke="#22c55e" stroke-width="2"/>
+<line x1="1042" y1="300" x2="1094" y2="300" stroke="#22c55e" stroke-width="2"/>
+<line x1="1068" y1="326" x2="1044" y2="356" stroke="#22c55e" stroke-width="2"/>
+<line x1="1068" y1="326" x2="1092" y2="356" stroke="#22c55e" stroke-width="2"/>
+<text x="1068" y="374" text-anchor="middle" font-family="Inter" font-size="13" font-weight="600" fill="#14532d">AI Health</text>
+<text x="1068" y="388" text-anchor="middle" font-family="Inter" font-size="13" font-weight="600" fill="#14532d">Agent</text>
+
+<!-- AI Agent → AI Triage Assessment -->
+<line x1="1048" y1="252" x2="910" y2="220" stroke="#64748b" stroke-width="1.5" marker-end="url(#a-assoc)"/>
+<!-- AI Agent → Get Specialist Recommendation -->
+<line x1="1050" y1="264" x2="930" y2="330" stroke="#64748b" stroke-width="1.5" marker-end="url(#a-assoc)"/>
+<!-- AI Agent → Join AI Video Call -->
+<line x1="1050" y1="276" x2="910" y2="438" stroke="#64748b" stroke-width="1.5" marker-end="url(#a-assoc)"/>
+<!-- AI Agent → Auto-Transcribe -->
+<line x1="1048" y1="285" x2="914" y2="526" stroke="#64748b" stroke-width="1.5" marker-end="url(#a-assoc)"/>
+<!-- AI Agent → Generate Meeting Summary -->
+<line x1="1044" y1="294" x2="920" y2="617" stroke="#64748b" stroke-width="1.5" marker-end="url(#a-assoc)"/>
+
+<!-- ══════════════════════════════════════
+     ACTOR: System Admin  (right, lower)
+══════════════════════════════════════ -->
+<circle cx="1068" cy="568" r="20" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+<line x1="1068" y1="588" x2="1068" y2="632" stroke="#f59e0b" stroke-width="2"/>
+<line x1="1042" y1="608" x2="1094" y2="608" stroke="#f59e0b" stroke-width="2"/>
+<line x1="1068" y1="632" x2="1044" y2="660" stroke="#f59e0b" stroke-width="2"/>
+<line x1="1068" y1="632" x2="1092" y2="660" stroke="#f59e0b" stroke-width="2"/>
+<text x="1068" y="678" text-anchor="middle" font-family="Inter" font-size="13" font-weight="600" fill="#78350f">System</text>
+<text x="1068" y="692" text-anchor="middle" font-family="Inter" font-size="13" font-weight="600" fill="#78350f">Admin</text>
+
+<!-- Admin → Manage AI Agents -->
+<line x1="1046" y1="580" x2="914" y2="718" stroke="#64748b" stroke-width="1.5" marker-end="url(#a-assoc)"/>
+<!-- Admin → Register/Login (goes up through boundary) -->
+<line x1="1048" y1="556" x2="502" y2="118" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3" marker-end="url(#a-assoc)"/>
+<text x="820" y="325" font-family="Inter" font-size="9" fill="#94a3b8" transform="rotate(-22,820,325)" text-anchor="middle">manages access</text>
+
+<!-- ══════════════════════════════════════
+     «include» ARROWS  (indigo dashed, horizontal)
+══════════════════════════════════════ -->
+
+<!-- Describe Symptoms ──include──▶ AI Triage Assessment -->
+<line x1="505" y1="220" x2="650" y2="220"
+      stroke="#4f46e5" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#a-inc)"/>
+<text x="577" y="213" text-anchor="middle" font-family="Inter" font-size="9.5" fill="#4f46e5">«include»</text>
+
+<!-- View Risk Level ──include──▶ Get Specialist Rec -->
+<line x1="515" y1="328" x2="630" y2="328"
+      stroke="#4f46e5" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#a-inc)"/>
+<text x="572" y="321" text-anchor="middle" font-family="Inter" font-size="9.5" fill="#4f46e5">«include»</text>
+
+<!-- Schedule Consult ──include──▶ Join AI Video Call -->
+<line x1="523" y1="438" x2="650" y2="438"
+      stroke="#4f46e5" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#a-inc)"/>
+<text x="586" y="431" text-anchor="middle" font-family="Inter" font-size="9.5" fill="#4f46e5">«include»</text>
+
+<!-- Join AI Video ──include──▶ Auto-Transcribe (vertical in right col) -->
+<path d="M 815 465 Q 840 497 815 502"
+      stroke="#4f46e5" stroke-width="1.5" stroke-dasharray="5,3" fill="none" marker-end="url(#a-inc)"/>
+<text x="862" y="487" text-anchor="start" font-family="Inter" font-size="9.5" fill="#4f46e5">«include»</text>
+
+<!-- Join AI Video ──include──▶ Generate Meeting Summary -->
+<path d="M 722 465 Q 696 540 720 592"
+      stroke="#4f46e5" stroke-width="1.5" stroke-dasharray="5,3" fill="none" marker-end="url(#a-inc)"/>
+<text x="667" y="534" text-anchor="middle" font-family="Inter" font-size="9.5" fill="#4f46e5">«include»</text>
+
+<!-- ══════════════════════════════════════
+     «extend» ARROWS  (orange dashed)
+══════════════════════════════════════ -->
+
+<!-- Post-Meeting Chat ──extend──▶ Generate Meeting Summary -->
+<path d="M 503 545 Q 580 582 640 618"
+      stroke="#e05c1a" stroke-width="1.5" stroke-dasharray="6,4" fill="none" marker-end="url(#a-ext)"/>
+<text x="566" y="572" text-anchor="middle" font-family="Inter" font-size="9.5" fill="#e05c1a">«extend»</text>
+
+<!-- View Risk Level ──extend──▶ AI Triage (feedback) -->
+<path d="M 400 298 Q 420 258 510 232"
+      stroke="#e05c1a" stroke-width="1.5" stroke-dasharray="6,4" fill="none" marker-end="url(#a-ext)"/>
+<text x="447" y="258" text-anchor="middle" font-family="Inter" font-size="9.5" fill="#e05c1a">«extend»</text>
+
+<!-- ══════════════════════════════════════
+     SECTION LABELS inside boundary
+══════════════════════════════════════ -->
+<text x="200" y="80" font-family="Inter" font-size="9" font-weight="600" fill="#94a3b8" letter-spacing="1.5">AUTHENTICATION</text>
+<line x1="200" y1="84" x2="960" y2="84" stroke="#e2e8f0" stroke-width="1"/>
+
+<text x="200" y="178" font-family="Inter" font-size="9" font-weight="600" fill="#94a3b8" letter-spacing="1.5">TRIAGE &amp; ASSESSMENT</text>
+<line x1="200" y1="182" x2="960" y2="182" stroke="#e2e8f0" stroke-width="1"/>
+
+<text x="200" y="396" font-family="Inter" font-size="9" font-weight="600" fill="#94a3b8" letter-spacing="1.5">VIDEO CONSULTATION</text>
+<line x1="200" y1="400" x2="960" y2="400" stroke="#e2e8f0" stroke-width="1"/>
+
+<text x="200" y="500" font-family="Inter" font-size="9" font-weight="600" fill="#94a3b8" letter-spacing="1.5">POST-CALL PROCESSING</text>
+<line x1="200" y1="504" x2="960" y2="504" stroke="#e2e8f0" stroke-width="1"/>
+
+<text x="200" y="686" font-family="Inter" font-size="9" font-weight="600" fill="#94a3b8" letter-spacing="1.5">ADMINISTRATION</text>
+<line x1="200" y1="690" x2="960" y2="690" stroke="#e2e8f0" stroke-width="1"/>
+
+<!-- ══════════════════════════════════════
+     LEGEND
+══════════════════════════════════════ -->
+<rect x="196" y="748" width="370" height="50" rx="8" fill="#f8faff" stroke="#e2e8f0" stroke-width="1.2"/>
+<text x="212" y="766" font-family="Inter" font-size="10" font-weight="700" fill="#334155">Legend</text>
+
+<!-- Association -->
+<line x1="212" y1="782" x2="248" y2="782" stroke="#475569" stroke-width="1.5" marker-end="url(#a-assoc)"/>
+<text x="254" y="786" font-family="Inter" font-size="9.5" fill="#475569">Association</text>
+
+<!-- Include -->
+<line x1="312" y1="782" x2="348" y2="782" stroke="#4f46e5" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#a-inc)"/>
+<text x="354" y="786" font-family="Inter" font-size="9.5" fill="#4f46e5">«include»</text>
+
+<!-- Extend -->
+<line x1="420" y1="782" x2="456" y2="782" stroke="#e05c1a" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#a-ext)"/>
+<text x="462" y="786" font-family="Inter" font-size="9.5" fill="#e05c1a">«extend»</text>
+
+<!-- Actor key -->
+<circle cx="519" cy="766" r="7" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+<text x="530" y="770" font-family="Inter" font-size="9.5" fill="#475569">Patient</text>
+<circle cx="519" cy="783" r="7" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+<text x="530" y="787" font-family="Inter" font-size="9.5" fill="#475569">AI Agent</text>
+
+</svg>
+
+  <p class="caption">Figure 1.1: Use Case Diagram of the Public Health Chatbot &nbsp;·&nbsp; Med-AI Capstone Project &nbsp;·&nbsp; LPU SEM 7, 2026</p>
+</div>
+</body>
+</html>

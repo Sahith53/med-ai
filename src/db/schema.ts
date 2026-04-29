@@ -1,5 +1,6 @@
 import { pgTable, text, timestamp, boolean, pgEnum } from "drizzle-orm/pg-core";
 import { nanoid } from "nanoid";
+import { integer } from "drizzle-orm/pg-core";
 
 export const meetingStatus = pgEnum("meeting_status", [
   "upcoming",
@@ -7,6 +8,13 @@ export const meetingStatus = pgEnum("meeting_status", [
   "completed",
   "cancelled",
   "processing",
+]);
+
+export const triageRisk = pgEnum("triage_risk", [
+  "low",
+  "medium",
+  "high",
+  "emergency",
 ]);
 
 export const user = pgTable("user", {
@@ -101,5 +109,24 @@ export const meetings = pgTable("meetings", {
   summary: text("summary"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
-  
+});
+
+export const triageSessions = pgTable("triage_sessions", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => nanoid()),
+  userId: text("user_id")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+  symptoms: text("symptoms"),
+  riskLevel: triageRisk("risk_level"),
+  severityScore: integer("severity_score"),
+  specialistRecommendation: text("specialist_recommendation"),
+  decisionAction: text("decision_action"),
+  meetingId: text("meeting_id").references(() => meetings.id, {
+    onDelete: "set null",
+  }),
+  rawMessages: text("raw_messages"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
