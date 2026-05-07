@@ -30,7 +30,7 @@ Example:
 - Mention of integration with Z
 
   `.trim(),
-  model: openai({ model: "gpt-4o", apiKey: process.env.OPENAI_API_KEY }),
+  model: openai({ model: "gpt-4.1", apiKey: process.env.OPENAI_API_KEY }),
 });
 
 export const meetingsProcessing = inngest.createFunction(

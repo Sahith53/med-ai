@@ -1,3 +1,5 @@
+"use client";
+
 import GeneratedAvatar from "@/components/generated-avatar";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import {

@@ -17,6 +17,7 @@ import { and, desc, eq, not } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
+import type { SessionConfig } from "@stream-io/openai-realtime-api";
 
 const openaiClient = new OpenAI({ apiKey: process.env.OPENAI_API_KEY! });
 
@@ -134,15 +135,15 @@ export async function POST(req: NextRequest) {
     const [latestUserTriageContext] = meetingLinkedTriageContext
       ? [meetingLinkedTriageContext]
       : await db
-          .select({
-            symptoms: triageSessions.symptoms,
-            riskLevel: triageSessions.riskLevel,
-            specialist: triageSessions.specialistRecommendation,
-          })
-          .from(triageSessions)
-          .where(eq(triageSessions.userId, existingMeeting.userId))
-          .orderBy(desc(triageSessions.createdAt))
-          .limit(1);
+        .select({
+          symptoms: triageSessions.symptoms,
+          riskLevel: triageSessions.riskLevel,
+          specialist: triageSessions.specialistRecommendation,
+        })
+        .from(triageSessions)
+        .where(eq(triageSessions.userId, existingMeeting.userId))
+        .orderBy(desc(triageSessions.createdAt))
+        .limit(1);
 
     const triageContext = latestUserTriageContext;
 
@@ -175,11 +176,38 @@ export async function POST(req: NextRequest) {
       call,
       openAiApiKey: process.env.OPENAI_API_KEY!,
       agentUserId: existingAgent.id,
+      model: "gpt-realtime",
     });
 
-    realtimeClient.updateSession({
+    // Pin the speech-to-text side of the session to English so the model
+    // doesn't auto-detect a different language from the patient's audio
+    // and code-switch its replies. We also explicitly configure VAD and
+    // noise reduction; otherwise the bot can stay silent after the user
+    // talks because turn detection never fires (e.g. when the mic picks up
+    // the bot's own voice through speakers, or input volume is low).
+    const sessionConfig: SessionConfig = {
       instructions: sessionInstructions,
-    });
+      input_audio_transcription: {
+        model: "whisper-1",
+        language: "en",
+      },
+      input_audio_noise_reduction: {
+        type: "near_field",
+      },
+      turn_detection: {
+        type: "server_vad",
+        threshold: 0.4,
+        prefix_padding_ms: 300,
+        silence_duration_ms: 500,
+      },
+    };
+
+    realtimeClient.updateSession(sessionConfig);
+
+    // Realtime models stay silent until they hear audio, which leaves the
+    // patient staring at a muted bot. Trigger an immediate response so the
+    // assistant greets the patient as soon as the session is established.
+    realtimeClient.createResponse();
   } else if (eventType === "call.session_participant_left") {
     const event = payload as CallSessionParticipantLeftEvent;
     const meetingId = event.call_cid.split(":")[1];
@@ -338,7 +366,7 @@ ${existingAgent.instructions}
       }));
 
     const aiResponse = await openaiClient.chat.completions.create({
-      model: "gpt-4o",
+      model: "gpt-4.1",
       messages: [
         { role: "system", content: systemInstructions },
         ...previousMessages,
