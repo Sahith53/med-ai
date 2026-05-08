@@ -1,6 +1,5 @@
 # 🏥 Med-AI — AI-Powered Medical Consultation Platform
-
-> **LPU SEM 7 Capstone Project** | An intelligent, real-time medical consultation platform where users interact with custom AI medical agents via live video, backed by automated transcription, AI summarization, and post-meeting chat.
+ An intelligent, real-time medical consultation platform where users interact with custom AI medical agents via live video, backed by automated transcription, AI summarization, and post-meeting chat.
 
 ---
 
